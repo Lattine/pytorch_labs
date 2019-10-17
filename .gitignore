@@ -4,3 +4,5 @@
 **/.vscode
 **/venv
 **/migrations
+**/data
+**/ckpt
