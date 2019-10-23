@@ -9,7 +9,7 @@ import cv2
 import lmdb
 import numpy as np
 from config import Config
-from data_helper import convert
+from data_helper import utils
 
 
 def check_iamge_valid(image_bin):
@@ -90,7 +90,7 @@ if __name__ == '__main__':
             pts = line.strip().split("\t")
             image_list.append(os.path.join(cfg.train_input_file_prefix, pts[0]))
             text_list.append(pts[1])
-        converter = convert.StrLabelConverter(cfg.alphabets, ignore_case=True)
+        converter = utils.StrLabelConverter(cfg.alphabets, ignore_case=True)
         create_dataset(output_path, image_list, text_list, cvt=converter)
 
     # ------------------- test lmdb ---------------------
