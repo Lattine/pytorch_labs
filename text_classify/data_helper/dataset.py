@@ -39,9 +39,9 @@ class DatasetBase:
 
         self.device = device
 
+        self._check_path(self._output_path)
         if force_build:
             remove_files(self._output_path)
-        self._check_path(self._output_path)
 
     def next_batch(self, data, batch_size):
         x, y = data["x"], data["y"]
