@@ -22,25 +22,36 @@ class Config(object):
     vocab_size = 10001
     sequence_length = 126  # 需要看数据集，具体调试
 
-    # ---------- 模型 -----------
-    model_name = "text_cnn"
-    save_path = os.path.join(BASE_URL, "ckpt")
-    saved_model = os.path.join(save_path, model_name + ".pth")
-    num_classes = 2
-    embedding_size = 300
-    filter_sizes = (2, 3, 4)  # 卷积核尺寸
-    num_filters = 256
-    dropout = 0.5
-
     # ---------- Train ----------
+    save_path = os.path.join(BASE_URL, "ckpt")
     lr = 1e-3
     batch_size = 64
     epoches = 100
     min_loss = 1000.0
     early_stop_thresh = 10  # 提前终止的轮数
 
-    # ---------- Train ----------
+    # ---------- Predict ----------
     predict_result = os.path.join(BASE_URL, "data", "result.csv")
+
+
+class Config4TextCnn(Config):
+    # ---------- 模型 -----------
+    model_name = "text_cnn"
+    saved_model = os.path.join(Config.save_path, model_name + ".pth")
+    num_classes = 2
+    filter_sizes = (2, 3, 4)  # 卷积核尺寸
+    num_filters = 256
+    dropout = 0.5
+
+
+class Config4TextRnn(Config):
+    # ---------- 模型 -----------
+    model_name = "text_rnn"
+    saved_model = os.path.join(Config.save_path, model_name + ".pth")
+    num_classes = 2
+    hidden_size = 128
+    num_layers = 2
+    dropout = 0.5
 
 
 # 以下用于自动创建所需目录

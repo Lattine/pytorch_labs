@@ -4,6 +4,5 @@
 # @Author  : Lattine
 
 # ======================
-from .config import Config
-
-__all__ = ["Config"]
+from .config import Config4TextCnn
+from .config import Config4TextRnn

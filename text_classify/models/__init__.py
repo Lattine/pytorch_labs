@@ -4,6 +4,5 @@
 # @Author  : Lattine
 
 # ======================
-from .textcnn import TextCNN as Model
-
-__all__ = ["Model"]
+from .text_cnn import TextCNN
+from .text_rnn import TextRNN

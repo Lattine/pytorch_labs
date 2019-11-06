@@ -6,10 +6,12 @@
 # ======================
 import os
 import torch
-from config import Config
+# from config import Config4TextCnn as Config
+from config import Config4TextRnn as Config
 from data_helper import Dataset
 from process.utils import AveragerMeter, init_network
-from models import Model
+# from models import TextCNN as Model
+from models import TextRNN as Model
 
 
 class Trainer:
