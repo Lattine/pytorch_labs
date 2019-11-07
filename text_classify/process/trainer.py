@@ -6,32 +6,37 @@
 # ======================
 import os
 import torch
-# from config import Config4TextCnn as Config
-from config import Config4TextRnn as Config
+
 from data_helper import Dataset
-from process.utils import AveragerMeter, init_network
-# from models import TextCNN as Model
-from models import TextRNN as Model
+from process import utils
+from process.utils import AveragerMeter
+from config import Config4TextCnn
+from models import TextCNN
+from config import Config4TextRnn
+from models import TextRNN
+from config import Config4TextRnnAtt as Config
+from models import TextRNNAtt as Model
 
 
 class Trainer:
-    def __init__(self, config, is_retrain=True):
+    def __init__(self, config, rebuild=False):
         self.config = config
         self.device = "cpu"
         self.min_loss = config.min_loss  # 用于保存最好的模型
         self.early_stop = self.config.early_stop_thresh  # 提前终止
 
-        self._load_data(is_retrain)  # 加载数据
+        self._load_data(rebuild)  # 加载数据
         self.config.vocab_size = self.vocab_size
         self.nets = Model(self.config, self.word_vectors)
-        init_network(self.nets)
+        utils.init_network(self.nets)
         print(self.nets)
+        print("Number of Nets' Paramters: {}".format(utils.get_nets_parameters(self.nets)))
 
-        if is_retrain:  # 尝试加载已训练的模型
+        if not rebuild:  # 尝试加载已训练的模型
             self._load_model(self.config.saved_model)
 
-    def _load_data(self, is_return=False):
-        self.train_dataset = Dataset(self.config, self.device, force_build=is_return)
+    def _load_data(self, rebuild):
+        self.train_dataset = Dataset(self.config, self.device, rebuild=rebuild)
         self.train_data = self.train_dataset.gen_data(self.config.train_data)
         self.vocab_size = self.train_dataset.vocab_size
         self.word_vectors = self.train_dataset.word_vectors
@@ -120,5 +125,5 @@ class Trainer:
 
 if __name__ == '__main__':
     cfg = Config()
-    p = Trainer(cfg, is_retrain=False)
+    p = Trainer(cfg, rebuild=True)
     p.train()

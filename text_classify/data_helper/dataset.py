@@ -26,7 +26,7 @@ EXTEND_WORDS = [("<PAD>", 0), ("<UNK>", 1)]
 
 
 class DatasetBase:
-    def __init__(self, config, device, force_build=False):
+    def __init__(self, config, device, rebuild=False):
         self._output_path = config.output_path  # 输出目录
         self._stopwords_path = config.stopwords if config.stopwords else None  # 停用词文件
         self._word_vectors_path = config.word_vectors if config.word_vectors else None  # 词向量文件
@@ -35,13 +35,13 @@ class DatasetBase:
 
         self.vocab_size = config.vocab_size  # 字典大小，初始化为配置中的大小，后期会根据实际自动调整
         self.word_vectors = None  # 词向量矩阵
-        self.rebuild = config.rebuild  # 是否重新构建模型数据集
 
         self.device = device
 
         self._check_path(self._output_path)
-        if force_build:
+        if rebuild:
             remove_files(self._output_path)
+            print("Last output tmp files is clear.")
 
     def next_batch(self, data, batch_size):
         x, y = data["x"], data["y"]
@@ -170,8 +170,8 @@ class DatasetBase:
 
 
 class Dataset(DatasetBase):
-    def __init__(self, config, device, force_build=False):
-        super(Dataset, self).__init__(config, device, force_build)
+    def __init__(self, config, device, rebuild=False):
+        super(Dataset, self).__init__(config, device, rebuild)
 
     def gen_data(self, path, filename=None):
         inputs, labels = self._read_data(path=path)  # 读入数据

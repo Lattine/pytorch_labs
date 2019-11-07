@@ -7,7 +7,13 @@
 import torch
 
 
+def get_nets_parameters(nets):
+    """计算模型参数个数"""
+    return sum([torch.numel(param) for param in nets.parameters()])
+
+
 def init_network(nets, excluded="embedding"):
+    """初始化网络参数"""
     for name, w in nets.named_parameters():
         if excluded not in name:
             if "weight" in name:

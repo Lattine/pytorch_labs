@@ -8,11 +8,13 @@ import os
 import pandas as pd
 import torch
 
-# from config import Config4TextCnn as Config
-from config import Config4TextRnn as Config
 from data_helper import PredictDataset
-# from models import TextCNN as Model
-from models import TextRNN as Model
+from config import Config4TextCnn
+from models import TextCNN
+from config import Config4TextRnn
+from models import TextRNN
+from config import Config4TextRnnAtt as Config
+from models import TextRNNAtt as Model
 
 
 class Tester:

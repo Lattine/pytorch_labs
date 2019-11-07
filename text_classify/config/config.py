@@ -18,8 +18,7 @@ class Config(object):
     word_vectors = os.path.join(BASE_URL, "data", "sgns.weibo.char")  # 词向量文件
     output_path = os.path.join(BASE_URL, "data", "output")  # 字典等数据集输出目录
     embedding_size = 300  # 词向量维度
-    vocab_size = 10001  # 字典大小，字=1w，词=10w+
-    sequence_length = 126  # 每条文本截取的长度
+    vocab_size = 100001  # 字典大小，字=1w，词=10w+
 
     # ---------- Train ----------
     save_path = os.path.join(BASE_URL, "ckpt")
@@ -34,6 +33,8 @@ class Config(object):
 
 
 class Config4TextCnn(Config):
+    sequence_length = 100  # 每条文本截取的长度
+
     # ---------- 模型 -----------
     model_name = "text_cnn"
     saved_model = os.path.join(Config.save_path, model_name + ".pth")
@@ -44,11 +45,26 @@ class Config4TextCnn(Config):
 
 
 class Config4TextRnn(Config):
+    sequence_length = 60  # 每条文本截取的长度
+
     # ---------- 模型 -----------
     model_name = "text_rnn"
     saved_model = os.path.join(Config.save_path, model_name + ".pth")
     num_classes = 2
     hidden_size = 128
+    num_layers = 2
+    dropout = 0.5
+
+
+class Config4TextRnnAtt(Config):
+    sequence_length = 32  # 每条文本截取的长度
+
+    # ---------- 模型 -----------
+    model_name = "text_rnn_att"
+    saved_model = os.path.join(Config.save_path, model_name + ".pth")
+    num_classes = 2
+    rnn_hidden_size = 128
+    att_hidden_size = 64
     num_layers = 2
     dropout = 0.5
 
