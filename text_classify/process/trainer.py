@@ -21,7 +21,7 @@ class Trainer:
         self.min_loss = config.min_loss  # 用于保存最好的模型
         self.early_stop = self.config.early_stop_thresh  # 提前终止
 
-        self._load_data()  # 加载数据
+        self._load_data(is_retrain)  # 加载数据
         self.config.vocab_size = self.vocab_size
         self.nets = Model(self.config, self.word_vectors)
         init_network(self.nets)
@@ -30,8 +30,8 @@ class Trainer:
         if is_retrain:  # 尝试加载已训练的模型
             self._load_model(self.config.saved_model)
 
-    def _load_data(self):
-        self.train_dataset = Dataset(self.config, self.device, force_build=True)
+    def _load_data(self, is_return=False):
+        self.train_dataset = Dataset(self.config, self.device, force_build=is_return)
         self.train_data = self.train_dataset.gen_data(self.config.train_data)
         self.vocab_size = self.train_dataset.vocab_size
         self.word_vectors = self.train_dataset.word_vectors
@@ -120,5 +120,5 @@ class Trainer:
 
 if __name__ == '__main__':
     cfg = Config()
-    p = Trainer(cfg)
+    p = Trainer(cfg, is_retrain=False)
     p.train()

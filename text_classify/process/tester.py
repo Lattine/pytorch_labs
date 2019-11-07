@@ -8,8 +8,8 @@ import os
 import pandas as pd
 import torch
 
-from config import Config4TextCnn as Config
-# from config import Config4TextRnn as Config
+# from config import Config4TextCnn as Config
+from config import Config4TextRnn as Config
 from data_helper import PredictDataset
 # from models import TextCNN as Model
 from models import TextRNN as Model

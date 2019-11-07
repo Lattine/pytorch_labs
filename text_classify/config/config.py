@@ -9,7 +9,6 @@ import os
 
 class Config(object):
     BASE_URL = os.path.abspath(os.path.dirname(os.getcwd()))
-    rebuild = False  # 是否重新构建模型
 
     # ---------- 数据集 ----------
     train_data = os.path.join(BASE_URL, "data", "train.csv")  # 训练数据
@@ -18,9 +17,9 @@ class Config(object):
     stopwords = None  # os.path.join(BASE_URL, "data", "stopwords.txt")  # 停用词文件
     word_vectors = os.path.join(BASE_URL, "data", "sgns.weibo.char")  # 词向量文件
     output_path = os.path.join(BASE_URL, "data", "output")  # 字典等数据集输出目录
-    embedding_size = 300
-    vocab_size = 10001
-    sequence_length = 126  # 需要看数据集，具体调试
+    embedding_size = 300  # 词向量维度
+    vocab_size = 10001  # 字典大小，字=1w，词=10w+
+    sequence_length = 126  # 每条文本截取的长度
 
     # ---------- Train ----------
     save_path = os.path.join(BASE_URL, "ckpt")

@@ -5,5 +5,6 @@
 ---
 
 ### text_classify 文本分类
-- `TextCNN`: [论文：Convolutional Neural Networks for Sentence Classification](https://arxiv.org/abs/1408.5882)
-
+- `TextCNN`: [论文：Convolutional Neural Networks for Sentence Classification](https://arxiv.org/pdf/1408.5882.pdf)
+- `TextRNN`: [论文：Recurrent Neural Network for Text Classification with Multi-Task Learning](https://arxiv.org/pdf/1605.05101.pdf)
+- `TextRNN_Att`: [论文：Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification](https://www.aclweb.org/anthology/P16-2034.pdf)
