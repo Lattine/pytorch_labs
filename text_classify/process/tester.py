@@ -13,8 +13,10 @@ from config import Config4TextCnn
 from models import TextCNN
 from config import Config4TextRnn
 from models import TextRNN
-from config import Config4TextRnnAtt as Config
-from models import TextRNNAtt as Model
+from config import Config4TextRnnAtt
+from models import TextRNNAtt
+from config import Config4TextRCnn as Config
+from models import TextRCNN as Model
 
 
 class Tester:

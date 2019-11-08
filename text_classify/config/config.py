@@ -69,6 +69,18 @@ class Config4TextRnnAtt(Config):
     dropout = 0.5
 
 
+class Config4TextRCnn(Config):
+    sequence_length = 64  # 每条文本截取的长度
+
+    # ---------- 模型 -----------
+    model_name = "text_rcnn"
+    saved_model = os.path.join(Config.save_path, model_name + ".pth")
+    num_classes = 2
+    rnn_hidden_size = 256
+    num_layers = 1
+    dropout = 0.5
+
+
 # 以下用于自动创建所需目录
 config = Config()
 if not os.path.exists(config.save_path):

@@ -7,3 +7,4 @@
 from .text_cnn import TextCNN
 from .text_rnn import TextRNN
 from .text_rnn_att import TextRNNAtt
+from .text_rcnn import TextRCNN
