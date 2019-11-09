@@ -16,8 +16,10 @@ from config import Config4TextRnn
 from models import TextRNN
 from config import Config4TextRnnAtt
 from models import TextRNNAtt
-from config import Config4TextRCnn as Config
-from models import TextRCNN as Model
+from config import Config4TextRCnn
+from models import TextRCNN
+from config import ConfigTransformer as Config
+from models import Transformer as Model
 
 
 class Trainer:
@@ -29,8 +31,9 @@ class Trainer:
 
         self._load_data(rebuild)  # 加载数据
         self.config.vocab_size = self.vocab_size
+        self.config.device = self.device
         self.nets = Model(self.config, self.word_vectors)
-        utils.init_network(self.nets)
+        # utils.init_network(self.nets)
         print(self.nets)
         print("Number of Nets' Paramters: {}".format(utils.get_nets_parameters(self.nets)))
 

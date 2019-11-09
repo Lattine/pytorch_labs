@@ -81,6 +81,20 @@ class Config4TextRCnn(Config):
     dropout = 0.5
 
 
+class ConfigTransformer(Config):
+    sequence_length = 64  # 每条文本截取的长度
+
+    # ---------- 模型 -----------
+    model_name = "transformer"
+    saved_model = os.path.join(Config.save_path, model_name + ".pth")
+    num_classes = 2
+    num_encoders = 4
+    num_heads = 6
+    model_dim = 300
+    hidden = 1024
+    dropout = 0.5
+
+
 # 以下用于自动创建所需目录
 config = Config()
 if not os.path.exists(config.save_path):
