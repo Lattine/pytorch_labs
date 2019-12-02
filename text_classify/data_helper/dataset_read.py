@@ -4,20 +4,18 @@
 # @Author  : Lattine
 
 # ======================
-"""
-用于创建Dataset的辅助函数，不同的数据集只要实现该文件读入的函数，即可复用Dataset。
-"""
-
+import re
 import pandas as pd
+import jieba
 
 
-# ------------------ O2O商铺食品安全相关评论发现 ------------------
-def read_file(path):
+def read_file(path, N=3):
+    """ 外汇利率短新闻 """
     raw = pd.read_csv(path)
-    raw["label"] = raw["label\tcomment"].apply(lambda x: x.strip().split("\t")[0])
-    raw["comment"] = raw["label\tcomment"].apply(lambda x: x.strip().split("\t")[1])
-    raw["cutted_comment"] = raw["comment"].apply(lambda x: list(x))
-    x = raw["cutted_comment"].values.tolist()
+    raw["content"] = raw["content"].apply(lambda x: re.sub(r"【.*?】|（.*?）|\d+|%|\.", "", x))
+    raw["content"] = raw["content"].apply(lambda s: [s[i:i + n] for n in range(1, N + 1) for i in range(len(s) - n + 1)])
+    x = raw["content"].values.tolist()
+    raw["label"] = raw["label"].apply(lambda x: str(x))
     y = raw["label"].values.tolist()
     return x, y
 

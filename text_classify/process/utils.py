@@ -7,21 +7,6 @@
 import torch
 
 
-def get_nets_parameters(nets):
-    """计算模型参数个数"""
-    return sum([torch.numel(param) for param in nets.parameters()])
-
-
-def init_network(nets, excluded="embedding"):
-    """初始化网络参数"""
-    for name, w in nets.named_parameters():
-        if excluded not in name:
-            if "weight" in name:
-                torch.nn.init.xavier_normal_(w)
-            elif "bias" in name:
-                torch.nn.init.constant_(w, 0)
-
-
 class AveragerMeter:
     """计算 `torch.Variable` ， `torch.Tensor`的平均值. """
 
