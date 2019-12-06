@@ -281,14 +281,3 @@ class PredictDataset(DatasetBase):
     def _inverse_t2ix(self, t2ix):
         ix2t = {v: k for k, v in t2ix.items()}
         return ix2t
-
-
-if __name__ == '__main__':
-    from config import Config
-
-    cfg = Config()
-    ds = Dataset(cfg, "cpu")
-    xs, ys = ds.gen_data(cfg.train_data)
-    for item in ds.next_batch(xs, ys, 4):
-        print(item)
-        print("-" * 100)

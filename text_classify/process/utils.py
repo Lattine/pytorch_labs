@@ -4,6 +4,8 @@
 # @Author  : Lattine
 
 # ======================
+import os
+import shutil
 import torch
 
 
@@ -32,3 +34,19 @@ class AveragerMeter:
             v = v.sum()
         self.n_count += count
         self.sum += v
+
+
+def check_top5(path):
+    files = os.listdir(path)
+    files.sort(reverse=True)
+    for fn in files:
+        fpath = os.path.join(path, fn)
+        if ".pth-" in fpath:
+            segs = fpath.split(".pth-")
+            id = int(segs[1]) + 1
+            if id < 5:
+                new_path = segs[0] + f".pth-{id}"
+                shutil.move(fpath, new_path)
+        elif ".pth" in fpath:
+            new_path = fpath + "-1"
+            shutil.move(fpath, new_path)

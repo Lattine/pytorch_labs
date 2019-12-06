@@ -5,3 +5,4 @@
 
 # ======================
 
+from .text_cnn import Config

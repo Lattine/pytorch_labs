@@ -7,7 +7,7 @@
 import os
 import torch
 from data_helper import Dataset
-from process.utils import AveragerMeter
+from process import utils
 from models import text_cnn as nets
 
 
@@ -39,7 +39,7 @@ class Trainer:
     def train(self):
         optimizer = torch.optim.Adam(self.model.parameters(), lr=self.config.lr)
         criterion = torch.nn.CrossEntropyLoss()
-        loss_avg = AveragerMeter()
+        loss_avg = utils.AveragerMeter()
 
         for epoch in range(self.config.epoches):
             self.model.train()
@@ -66,7 +66,7 @@ class Trainer:
         self.model.eval()
         n_correct = 0
         total_num = 0
-        loss_avg = AveragerMeter()
+        loss_avg = utils.AveragerMeter()
         for x, y in self.eval_iter:
             batch_size = x.size(0)
             total_num += batch_size
@@ -90,8 +90,8 @@ class Trainer:
             return False
         if self.min_loss > loss:
             self.min_loss = loss
-            torch.save(self.model.state_dict(), self.config.saved_model + f"-{epoch + 1}")  # 记录历史
-            # torch.save(self.nets.state_dict(), self.config.saved_model)
+            utils.check_top5(self.config.save_path)
+            torch.save(self.model.state_dict(), self.config.saved_model)
             return True
 
     def _early_stop(self, is_best):
