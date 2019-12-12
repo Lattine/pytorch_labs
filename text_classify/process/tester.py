@@ -53,11 +53,13 @@ class Tester:
     # ---------- 需要依据数据集重构 ----------
     def _read_data(self, path):
         raw = pd.read_csv(path)
-        raw["content"] = raw["content"].apply(lambda x: jieba.lcut(re.sub(r"【.*?】|（.*?）|\d+|%|\.", "", x)))
+        print(raw.head())
+        # raw["content"] = raw["content"].apply(lambda x: jieba.lcut(re.sub(r"【.*?】|（.*?）|\d+|%|\.", "", x)))
+        raw["content"] = raw["comment"].apply(lambda s: [s[i:i + n] for n in range(1, 3 + 1) for i in range(len(s) - n + 1)])
         for ix, row in raw.iterrows():
             item = {
                 "content": row["content"],
-                "target": row["label"],
+                "id": row["id"],
             }
             self.test_data.append(item)
 
@@ -65,12 +67,13 @@ class Tester:
         pass
 
     def post_result(self):
-        raw = {"prediction": [], "target": [], "proba": [], "content": []}
+        # raw = {"prediction": [], "target": [], "proba": [], "content": []}
+        raw = {"id": [], "label": []}
         for data in self.test_data:
-            raw["target"].append(data["target"])
-            raw["prediction"].append(data["prediction"])
-            raw["proba"].append(data["proba"])
-            raw["content"].append(data["content"])
+            raw["id"].append(data["id"])
+            raw["label"].append(data["prediction"])
+            # raw["proba"].append(data["proba"])
+            # raw["content"].append(data["content"])
 
         df = pd.DataFrame(raw)
         df.to_csv(self.config.predict_result, index=False)

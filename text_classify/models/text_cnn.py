@@ -17,7 +17,7 @@ class Config:
     # ---------- 数据集 ----------
     train_data = os.path.join(BASE_URL, "data", "cmt", "train.csv")  # 训练数据
     eval_data = os.path.join(BASE_URL, "data", "cmt", "train.csv")  # 验证数据
-    test_data = os.path.join(BASE_URL, "data", "cmt", "train.csv")  # 预测数据
+    test_data = os.path.join(BASE_URL, "data", "cmt", "test.csv")  # 预测数据
     output_path = os.path.join(BASE_URL, "data", "cmt", "output")  # 字典等数据集输出目录
     stopwords = os.path.join(BASE_URL, "data", "stopwords.txt")  # 停用词文件
     word_vectors = os.path.join(BASE_URL, "data", "sgns.weibo.char")  # 词向量文件
