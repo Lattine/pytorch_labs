@@ -11,7 +11,7 @@ import torch.nn.functional as F
 
 class Config:
     # BASE_URL = os.path.abspath(os.path.dirname(os.getcwd()))
-    BASE_URL = r"E:\tmp\ch_crnn"  # for local test
+    BASE_URL = r"/home/zhi/dataset/crnn_ctc"  # for local test
 
     # --------- 构造数据集 -----------
     flush_examples = 1000
@@ -29,7 +29,7 @@ class Config:
     save_path = os.path.join(BASE_URL, "ckpt")
     saved_model = os.path.join(save_path, model_name + ".pth")  # 模型保存的路径及名称
     epoches = 10000
-    batch_size = 16
+    batch_size = 32
     workers = 0
     lr = 1e-3
     min_loss = float("inf")

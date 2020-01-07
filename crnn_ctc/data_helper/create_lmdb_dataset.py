@@ -92,7 +92,7 @@ if __name__ == '__main__':
     train_lmdb_output = cfg.train_lmdb
     if not os.path.exists(train_lmdb_output): os.makedirs(train_lmdb_output)
     image_list, text_list = load_data(cfg.train_image_label_file, cfg.train_image_prefix)
-    create_dataset(train_lmdb_output, image_list, text_list, converter=converter)
+    create_dataset(train_lmdb_output, image_list, text_list, converter=converter, lmdb_size=1023**3*3)
 
     # ------------------- eval dataset lmdb -------------------
     eval_lmdb_output = cfg.eval_lmdb
