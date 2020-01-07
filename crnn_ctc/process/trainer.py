@@ -79,6 +79,7 @@ class Trainer:
         max_iter = len(eval_loader)
         for images, labels, lengths, texts in iter(eval_loader):
             images = images.to(self.device)
+            labels = labels.to(self.device)
             batch_size = images.size(0)
             with torch.no_grad():
                 preds = self.model(images)
